@@ -72,7 +72,7 @@ export default function Home() {
       <a href="https://github.com/TamaraZaslavsky82" target="_blank" rel="noopener noreferrer">
         <AiFillGithub style={{ color: 'violet', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} />
       </a>
-      <a href="https://www.linkedin.com/in/tamara-zaslavsky-27a0331b0/" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.linkedin.com/in/tamarazaslavsky/" target="_blank" rel="noopener noreferrer">
         <AiFillLinkedin style={{ color: 'aqua', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} />
       </a>
       <AiFillMail style={{ color: 'blue', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} onClick={handleEmailClick} />
