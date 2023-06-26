@@ -107,8 +107,8 @@
   }
 
   .b2:hover{
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
-    background-color: whitesmoke;
+    box-shadow: 0 0 10px 5px rgba(248, 3, 65, 1);
+    background-color: rgb(253, 248, 250);
     color:rgb(255, 0, 119);
   }
  .section1 {
