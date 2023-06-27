@@ -69,6 +69,7 @@ export default function Home() {
   }
   return (
     <div className={`container-fluid ${style.contenedor}`}>
+     
       <a href="https://github.com/TamaraZaslavsky82" target="_blank" rel="noopener noreferrer">
         <AiFillGithub style={{ color: 'violet', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} />
       </a>
@@ -139,6 +140,7 @@ export default function Home() {
               onClick={() => setMostrarModalSeccion1(true)}
             />
             <h2 className={style.visti}>Visti e Viaggi</h2>
+           
             <p className={style.visti2}>Conoce más sobre el proyecto</p>
           </div>
         )}
@@ -159,6 +161,7 @@ export default function Home() {
           <br /><br />
           Es una plataforma creada para realizar reservas de vuelos a diferentes partes del mundo. La aplicación cuenta con una interfaz intuitiva y amigable para el usuario, permitiendo seleccionar destinos, fechas y preferencias de viaje. También ofrece información detallada sobre los vuelos disponibles, precios, duración del viaje y opciones de alojamiento. El objetivo de Viaggi e Visti es brindar a los usuarios una experiencia cómoda y segura al reservar sus vuelos.
         </p>
+        <a href='https://repo-vv.vercel.app'>Vista el sitio web</a>
         <button className={style.b2} onClick={handleCerrarModalSeccion1}>
           Cerrar
         </button>
@@ -180,6 +183,7 @@ export default function Home() {
           <br /><br />
           UrbanBuy es una aplicación de comercio electrónico diseñada para ofrecer una experiencia de compra única. Permite a los usuarios explorar y comprar una amplia variedad de productos, desde ropa y accesorios hasta electrónica y artículos para el hogar. La aplicación cuenta con funciones avanzadas de búsqueda, recomendaciones personalizadas y un proceso de compra seguro. UrbanBuy se esfuerza por brindar a sus usuarios la mejor experiencia de compra en línea posible.
         </p>
+        <a href='https://urbanbuy.netlify.app'>Visita el sitio web</a>
         <button className={style.b2} onClick={handleCerrarModalSeccion2}>
           Cerrar
         </button>

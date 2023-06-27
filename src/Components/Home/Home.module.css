@@ -10,6 +10,7 @@
   background-size:90%;
   background-repeat: no-repeat;
   background-attachment: fixed;
+ 
 }
 
   .hola {
@@ -160,4 +161,10 @@ width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: -35vh;
+}
+.derechos{
+  color: blueviolet;
+  writing-mode: vertical-rl;
+  width: 2em;
+  margin-left: 1200px;
 }
