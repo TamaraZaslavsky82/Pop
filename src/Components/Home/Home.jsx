@@ -12,7 +12,10 @@ import urban2 from '../../img/urban2.mp4'
 import { AiFillGithub } from "react-icons/ai";
 import { AiFillLinkedin } from "react-icons/ai";
 import { AiFillMail } from 'react-icons/ai';
-import {AiOutlineArrowDown} from 'react-icons/ai'
+import {AiOutlineArrowDown, AiFillEdit} from 'react-icons/ai'
+import CommentForm from './CommentForm/CommentForm';
+import { BsFillChatRightDotsFill } from "react-icons/bs";
+
 
 export default function Home() {
   const [nombreUsuario, setNombreUsuario] = useState('');
@@ -69,7 +72,10 @@ export default function Home() {
   }
   return (
     <div className={`container-fluid ${style.contenedor}`}>
-     
+      <div className={style.comentarios}><AiFillEdit style={{fontSize:'25px',  color: 'rgb(238, 10, 200)'}}/>
+      <BsFillChatRightDotsFill style={{fontSize:'25px',  color: 'blue', marginLeft:'30px'}}/></div>
+      
+
       <a href="https://github.com/TamaraZaslavsky82" target="_blank" rel="noopener noreferrer">
         <AiFillGithub style={{ color: 'violet', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} />
       </a>
@@ -87,7 +93,7 @@ export default function Home() {
           {nombreUsuario === '' ? (
             <>
               <h4 className={style.nombre}>Por favor ingresa tu nombre</h4>
-              <input type="text" onKeyPress={handleKeyPress} />
+              <input className={style.input} type="text" onKeyPress={handleKeyPress} />
             </>
           ) : null}
           {nombreUsuario !== '' && (
@@ -106,6 +112,7 @@ export default function Home() {
         </div>
         <div className={`col-12 col-md-6 d-flex justify-content-center align-items-center ${style.imagen}`}>
           <img src={TAM} alt="tam" className={`img-thumbnail`} style={{ height: '80vh' }} />
+          
         </div>
       </div>
       <div>
