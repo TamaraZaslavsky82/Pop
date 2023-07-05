@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { addComment, db } from '../../../Certification.js';
+import style from './CommentForm.module.css'
 
 const CommentForm = () => {
   const [name, setName] = useState('');
@@ -35,7 +36,7 @@ const CommentForm = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <h3>Dejar un comentario</h3>
       <form onSubmit={handleSubmit}>
         <input
@@ -43,13 +44,15 @@ const CommentForm = () => {
           placeholder="Nombre"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className={style.input}
         />
         <textarea
           placeholder="Comentario"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          className={style.textarea}
         ></textarea>
-        <button type="submit">Enviar comentario</button>
+        <button className={style.buttom} type="submit">Enviar comentario</button>
       </form>
 
       <h3>Comentarios</h3>

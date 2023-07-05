@@ -15,6 +15,7 @@ import { AiFillMail } from 'react-icons/ai';
 import {AiOutlineArrowDown, AiFillEdit} from 'react-icons/ai'
 import CommentForm from './CommentForm/CommentForm';
 import { BsFillChatRightDotsFill } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 
 export default function Home() {
@@ -72,10 +73,13 @@ export default function Home() {
   }
   return (
     <div className={`container-fluid ${style.contenedor}`}>
-      <div className={style.comentarios}><AiFillEdit style={{fontSize:'25px',  color: 'rgb(238, 10, 200)'}}/>
-      <BsFillChatRightDotsFill style={{fontSize:'25px',  color: 'blue', marginLeft:'30px'}}/></div>
-      
-
+      <div className={style.comentarios}>
+        
+        <AiFillEdit style={{fontSize:'25px',  color: 'rgb(238, 10, 200)'}}/>
+        <Link to='/comentarios'>
+      <BsFillChatRightDotsFill style={{fontSize:'25px',  color: 'blue', marginLeft:'30px'}}/>
+      </Link>
+      </div>
       <a href="https://github.com/TamaraZaslavsky82" target="_blank" rel="noopener noreferrer">
         <AiFillGithub style={{ color: 'violet', marginLeft: '10vh', marginTop: '5vh', fontSize: '30px' }} />
       </a>
