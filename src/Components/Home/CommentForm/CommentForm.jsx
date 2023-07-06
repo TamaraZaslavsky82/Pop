@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { addComment, db } from '../../../Certification.js';
 import style from './CommentForm.module.css'
-import Scenne from '../../Scenne/Scenne.js';
+
 
 const CommentForm = () => {
   const [name, setName] = useState('');
@@ -38,7 +38,7 @@ const CommentForm = () => {
 
   return (
     <div className={style.container}>
-      <Scenne/>
+     
       <h3 className={style.comentario}>Dejar un comentario</h3>
       <form onSubmit={handleSubmit}>
         <input

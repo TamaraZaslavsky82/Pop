@@ -11,6 +11,7 @@ const Scene = () => {
 
     // Scene
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
     const camera = new THREE.PerspectiveCamera(
       25,
       currentMount.clientWidth / currentMount.clientHeight,
@@ -21,10 +22,10 @@ const Scene = () => {
     camera.position.z = 6;
 
     // Background
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/envmap/city.jpg', () => {
-      scene.background = texture;
-    });
+    // const textureLoader = new THREE.TextureLoader();
+    // const texture = textureLoader.load('/envmap/city.jpg', () => {
+    //   scene.background = texture;
+    // });
 
     // Renderer
     const renderer = new THREE.WebGLRenderer();
@@ -123,7 +124,7 @@ const Scene = () => {
   return (
     <div
       className="contenedor3d"
-      style={{ width: "100%", height: "70vh" }}
+      style={{ width: "300%", height: "70vh", marginLeft:'100px', marginTop:'-20px' }}
       ref={mountRef}
     ></div>
   );

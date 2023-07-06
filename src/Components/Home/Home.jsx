@@ -16,7 +16,7 @@ import {AiOutlineArrowDown, AiFillEdit} from 'react-icons/ai'
 import CommentForm from './CommentForm/CommentForm';
 import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
-
+import Scenne from '../Scenne/Scenne.js';
 
 export default function Home() {
   const [nombreUsuario, setNombreUsuario] = useState('');
@@ -72,9 +72,10 @@ export default function Home() {
     window.open(pdfUrl, '_blank');
   }
   return (
+ 
+    
     <div className={`container-fluid ${style.contenedor}`}>
       <div className={style.comentarios}>
-        
         <AiFillEdit style={{fontSize:'25px',  color: 'rgb(238, 10, 200)'}}/>
         <Link to='/comentarios'>
       <BsFillChatRightDotsFill style={{fontSize:'25px',  color: 'blue', marginLeft:'30px'}}/>
@@ -114,9 +115,10 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className={`col-12 col-md-6 d-flex justify-content-center align-items-center ${style.imagen}`}>
-          <img src={TAM} alt="tam" className={`img-thumbnail`} style={{ height: '80vh' }} />
+        <div className={`col-6 col-md-3 d-flex justify-content-center align-items-center ${style.imagen}`}>
+          {/* <img src={TAM} alt="tam" className={`img-thumbnail`} style={{ height: '80vh' }} /> */}
           
+          <Scenne/>
         </div>
       </div>
       <div>
@@ -199,6 +201,8 @@ export default function Home() {
           Cerrar
         </button>
       </Modal>
+      
     </div>
+    
   );
 }
