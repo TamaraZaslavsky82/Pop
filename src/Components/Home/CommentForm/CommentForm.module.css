@@ -36,5 +36,16 @@
     background-color:inherit;
     color: #f3d6fc;
     border-color: rgb(0, 110, 255);
+    height: 30px;
+    border-radius: 10px;
     
+  }
+
+  .comentario{
+    color:#4402fa;
+    margin-top: 50px;
+  }
+
+  .contenedor{
+    background-color: aquamarine;
   }

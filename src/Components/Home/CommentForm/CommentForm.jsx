@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { addComment, db } from '../../../Certification.js';
 import style from './CommentForm.module.css'
+import Scenne from '../../Scenne/Scenne.js';
 
 const CommentForm = () => {
   const [name, setName] = useState('');
@@ -37,7 +38,8 @@ const CommentForm = () => {
 
   return (
     <div className={style.container}>
-      <h3>Dejar un comentario</h3>
+      <Scenne/>
+      <h3 className={style.comentario}>Dejar un comentario</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -54,7 +56,7 @@ const CommentForm = () => {
         ></textarea>
         <button className={style.buttom} type="submit">Enviar comentario</button>
       </form>
-
+<div className={style.contenedor}>
       <h3>Comentarios</h3>
       {comments.map((comment, index) => (
         <div key={index}>
@@ -62,6 +64,7 @@ const CommentForm = () => {
           <p>{comment.comentario}</p>
         </div>
       ))}
+      </div>
     </div>
   );
 };
