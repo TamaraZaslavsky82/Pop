@@ -115,10 +115,10 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className={`col-6 col-md-3 d-flex justify-content-center align-items-center ${style.imagen}`}>
+        <div >
           {/* <img src={TAM} alt="tam" className={`img-thumbnail`} style={{ height: '80vh' }} /> */}
           
-          <Scenne/>
+          <Scenne className={style.scenne}/>
         </div>
       </div>
       <div>
