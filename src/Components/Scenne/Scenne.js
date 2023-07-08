@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
 const Scene = () => {
   const mountRef = useRef(null);
   const [showText, setShowText] = useState(false);
-  
 
   useEffect(() => {
     const currentMount = mountRef.current;
@@ -23,25 +23,31 @@ const Scene = () => {
     scene.add(camera);
     camera.position.z = 6;
 
-    
-
     // Renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     currentMount.appendChild(renderer.domElement);
 
+    // Background texture
+    const textureLoader = new THREE.TextureLoader();
+    const backgroundTexture = textureLoader.load('/models/busmodel/noche.jpg');
+    scene.background = backgroundTexture;
+
     // Loader
     const gltfLoader = new GLTFLoader();
+    const objLoader = new OBJLoader();
+
     let busModel = null;
     let moon = null;
-    let EDIFICIO = null;
+    let EDIFICIO2 = null;
+    let EDIFICIO1 = null;
 
     gltfLoader.load(
       '/models/busmodel/Busstation.glb',
       (gltf) => {
         busModel = gltf.scene;
         scene.add(busModel);
-        busModel.position.set(0, -0.6, 0);
+        busModel.position.set(0, -1.2, 0);
         busModel.scale.set(0.15, 0.15, 0.15);
 
         busModel.traverse((node) => {
@@ -57,7 +63,6 @@ const Scene = () => {
         busModel.addEventListener('mouseout', handleMouseOut);
         busModel.addEventListener('click', handleModelClick);
       },
-
       () => {},
       () => {}
     );
@@ -87,23 +92,46 @@ const Scene = () => {
     }
 
     gltfLoader.load(
-      'models/busmodel/EDIFICIO.glb',
+      '/models/busmodel/EDIFICIO2.glb',
       (gltf) => {
-        EDIFICIO = gltf.scene;
-        scene.add(EDIFICIO);
+        EDIFICIO2 = gltf.scene;
+        scene.add(EDIFICIO2);
 
         const desiredHeight = 2; // Altura deseada del modelo
-        const scaleFactor = desiredHeight / EDIFICIO.scale.y;
-        EDIFICIO.scale.y = desiredHeight;
+        const scaleFactor = desiredHeight / EDIFICIO2.scale.y;
+        EDIFICIO2.scale.y = desiredHeight;
 
         // Escalar los ejes X y Z en la misma proporción para mantener las proporciones originales
-        EDIFICIO.scale.x *= scaleFactor;
-        EDIFICIO.scale.z *= scaleFactor;
+        EDIFICIO2.scale.x *= scaleFactor;
+        EDIFICIO2.scale.z *= scaleFactor;
 
-        EDIFICIO.position.set(0.010, 1, 1.2);
-        EDIFICIO.scale.set(0.15, 0.15, 0.15);
+        EDIFICIO2.position.set(0.010, 0.4, 1.2);
+        EDIFICIO2.scale.set(0.15, 0.15, 0.15);
 
-        EDIFICIO.rotateY(Math.PI / 2.1)
+        EDIFICIO2.rotateY(Math.PI / 2.1)
+      },
+      () => {},
+      () => {}
+    );
+
+    gltfLoader.load(
+      '/models/busmodel/EDIFICIO1.glb',
+      (gltf) => {
+        EDIFICIO1 = gltf.scene;
+        scene.add(EDIFICIO1);
+
+        const desiredHeight = 2; // Altura deseada del modelo
+        const scaleFactor = desiredHeight / EDIFICIO1.scale.y;
+        EDIFICIO1.scale.y = desiredHeight;
+
+        // Escalar los ejes X y Z en la misma proporción para mantener las proporciones originales
+        EDIFICIO1.scale.x *= scaleFactor;
+        EDIFICIO1.scale.z *= scaleFactor;
+
+        EDIFICIO1.position.set(0.015, 0.4, -1);
+        EDIFICIO1.scale.set(0.15, 0.15, 0.15);
+
+        EDIFICIO1.rotateY(Math.PI / 2.1)
       },
       () => {},
       () => {}
@@ -160,7 +188,7 @@ const Scene = () => {
     setShowText(true);
   };
 
-  const handleTextClick = () => {
+  const handleCloseClick = () => {
     setShowText(false);
   };
 
@@ -173,7 +201,7 @@ const Scene = () => {
       {showText && (
         <div
           style={{
-            display: 'block',
+           display: 'block',
             position: 'absolute',
             top: '20px',
             left: '20px',
@@ -183,12 +211,11 @@ const Scene = () => {
             fontSize: '16px',
             marginLeft:'500PX',
             marginTop:'150px',
-            borderRadius:'10PX',
-            cursor: 'pointer'
+            borderRadius:'10px'
           }}
-          onClick={handleTextClick}
         >
           Funcion de texto al darle click al <br/>la estacion de bus, nos permite crear <br/> modelos informativos con efectos 3D.
+          <button  style={{border:'none', backgroundColor:'inherit', color:'whitesmoke'}} onClick={handleCloseClick}>close</button>
         </div>
       )}
     </div>
