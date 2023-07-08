@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { Points } from 'three';
+
 
 const Scene = () => {
   const mountRef = useRef(null);
@@ -21,17 +23,42 @@ const Scene = () => {
       1000
     );
     scene.add(camera);
-    camera.position.z = 6;
+    camera.position.z = 7;
+    const createStars = () => {
+      const starGeometry = new THREE.BufferGeometry();
+      const starMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.02,
+        sizeAttenuation: false
+      });
+    
+      const starVertices = [];
+    
+      // Generar posiciones aleatorias para las estrellas
+      for (let i = 0; i < 1000; i++) {
+        const x = THREE.MathUtils.randFloatSpread(10);
+        const y = THREE.MathUtils.randFloatSpread(10);
+        const z = THREE.MathUtils.randFloatSpread(10);
+    
+        starVertices.push(x, y, z);
+      }
+    
+      starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    
+      const stars = new Points(starGeometry, starMaterial);
+      scene.add(stars);
+    };
+    
 
     // Renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     currentMount.appendChild(renderer.domElement);
 
-    // Background texture
-    const textureLoader = new THREE.TextureLoader();
-    const backgroundTexture = textureLoader.load('/models/busmodel/noche.jpg');
-    scene.background = backgroundTexture;
+// Crear estrellas
+createStars();
+
+    
 
     // Loader
     const gltfLoader = new GLTFLoader();
@@ -40,7 +67,10 @@ const Scene = () => {
     let busModel = null;
     let moon = null;
     let EDIFICIO2 = null;
-    let EDIFICIO1 = null;
+    let EDIFICIO4 = null
+    let EDIFICIO5 =null
+ 
+    
 
     gltfLoader.load(
       '/models/busmodel/Busstation.glb',
@@ -105,7 +135,7 @@ const Scene = () => {
         EDIFICIO2.scale.x *= scaleFactor;
         EDIFICIO2.scale.z *= scaleFactor;
 
-        EDIFICIO2.position.set(0.010, 0.4, 1.2);
+        EDIFICIO2.position.set(0.01, 0.4, 1.2);
         EDIFICIO2.scale.set(0.15, 0.15, 0.15);
 
         EDIFICIO2.rotateY(Math.PI / 2.1)
@@ -115,27 +145,30 @@ const Scene = () => {
     );
 
     gltfLoader.load(
-      '/models/busmodel/EDIFICIO1.glb',
+      '/models/busmodel/EDIFICIO4.glb',
       (gltf) => {
-        EDIFICIO1 = gltf.scene;
-        scene.add(EDIFICIO1);
+        EDIFICIO4 = gltf.scene;
+        scene.add(EDIFICIO4);
 
         const desiredHeight = 2; // Altura deseada del modelo
-        const scaleFactor = desiredHeight / EDIFICIO1.scale.y;
-        EDIFICIO1.scale.y = desiredHeight;
+        const scaleFactor = desiredHeight / EDIFICIO4.scale.y;
+        EDIFICIO4.scale.y = desiredHeight;
 
         // Escalar los ejes X y Z en la misma proporción para mantener las proporciones originales
-        EDIFICIO1.scale.x *= scaleFactor;
-        EDIFICIO1.scale.z *= scaleFactor;
+        EDIFICIO4.scale.x *= scaleFactor;
+        EDIFICIO4.scale.z *= scaleFactor;
 
-        EDIFICIO1.position.set(0.015, 0.4, -1);
-        EDIFICIO1.scale.set(0.15, 0.15, 0.15);
+        EDIFICIO4.position.set(0.0015, 0.4, -2.3);
+        EDIFICIO4.scale.set(0.15, 0.15, 0.11);
 
-        EDIFICIO1.rotateY(Math.PI / 2.1)
+        EDIFICIO4.rotateY(Math.PI / 2.1)
       },
       () => {},
       () => {}
     );
+
+    
+    
 
     gltfLoader.load(
       '/models/busmodel/moon.glb',
@@ -150,17 +183,16 @@ const Scene = () => {
     );
 
     // Lights
-    const light = new THREE.AmbientLight(0x404040);
-    scene.add(light);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    scene.add(directionalLight);
+    const ambientLight = new THREE.AmbientLight(0xffd7b2, 0.5); // Ajustar la intensidad a 0.5 o un valor más bajo
+scene.add(ambientLight);
 
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3); // Ajustar la intensidad a 0.3 o un valor más bajo
+scene.add(directionalLight);
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    const ambientLight = new THREE.AmbientLight(0xffd7b2, 1.5);
-    scene.add(ambientLight);
+    
 
     const animate = () => {
       controls.update();
