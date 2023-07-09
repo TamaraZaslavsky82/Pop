@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import * as TWEEN from '@tweenjs/tween.js';
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { Points } from 'three';
+import { Tween } from '@tweenjs/tween.js';
+
 
 
 const Scene = () => {
   const mountRef = useRef(null);
   const [showText, setShowText] = useState(false);
+ 
+
 
   useEffect(() => {
     const currentMount = mountRef.current;
@@ -44,31 +50,50 @@ const Scene = () => {
       }
     
       starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-    
+      
       const stars = new Points(starGeometry, starMaterial);
       scene.add(stars);
     };
     
-
+    
+    
     // Renderer
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     currentMount.appendChild(renderer.domElement);
-
-// Crear estrellas
-createStars();
-
     
+    // Crear estrellas
+    createStars();
+    
+    let ovniPosition = { x: 2, y: 0.5, z: 0.5 };
+    const animateOvni = () => {
+      const targetPosition = { x: Math.random() * 10 - 5, y: Math.random() * 10 - 5, z: Math.random() * 10 - 5 };
+      const tween = new TWEEN.Tween(ovniPosition)
+        .to(targetPosition, 1500)
+        .easing(TWEEN.Easing.Quadratic.InOut)
+        .onUpdate(() => {
+          if (ovnis) { // Verificar si ovnis no es null
+            ovnis.position.set(ovniPosition.x, ovniPosition.y, ovniPosition.z);
+          }
+        })
+        .onComplete(() => {
+          animateOvni();
+        })
+        .start();
+    };
+    
+
 
     // Loader
     const gltfLoader = new GLTFLoader();
-    const objLoader = new OBJLoader();
+   
 
     let busModel = null;
     let moon = null;
     let EDIFICIO2 = null;
     let EDIFICIO4 = null
-    let EDIFICIO5 =null
+    let ovnis = null
+    let piso = null
  
     
 
@@ -175,13 +200,36 @@ createStars();
       (gltf) => {
         moon = gltf.scene;
         scene.add(moon);
-        moon.position.set(2, 0.5, 0.5);
+        moon.position.set(3, 0.8, 0.5);
         moon.scale.set(0.15, 0.15, 0.15);
+       
       },
       () => {},
       () => {}
     );
 
+   
+
+    gltfLoader.load(
+      '/models/busmodel/ovnis.glb',
+      (gltf) => {
+        ovnis = gltf.scene;
+       
+          // El objeto ovni es válido, puedes acceder a sus propiedades
+          scene.add(ovnis);
+          ovnis.position.set(2, 0.5, 0.5);
+          ovnis.scale.set(0.019, 0.019, 0.019);
+          
+        
+        
+      },
+      () => {},
+      () => {}
+    );
+    
+    
+
+    
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffd7b2, 0.5); // Ajustar la intensidad a 0.5 o un valor más bajo
 scene.add(ambientLight);
@@ -198,10 +246,11 @@ scene.add(directionalLight);
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
+      TWEEN.update(); // Actualizar Tween.js
     };
 
+    animateOvni(); // Iniciar la animación del ovni
     animate();
-
     // Clean up scene
     return () => {
       currentMount.removeChild(renderer.domElement);
