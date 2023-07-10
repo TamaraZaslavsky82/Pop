@@ -226,8 +226,19 @@ const Scene = () => {
       () => {},
       () => {}
     );
-    
-    
+    gltfLoader.load(
+      '/models/busmodel/piso.glb',
+      (gltf) => {
+        piso = gltf.scene;
+        scene.add(piso);
+        piso.position.set(0.015, -1.0,0);
+        piso.scale.set(0.25, 0.25, 0.35);
+       
+      },
+      () => {},
+      () => {}
+    );
+
 
     
     // Lights
